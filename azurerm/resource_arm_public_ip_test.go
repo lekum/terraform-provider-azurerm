@@ -27,7 +27,8 @@ func TestAccAzureRMPublicIpStatic_basic(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					testCheckAzureRMPublicIpExists(resourceName),
 					resource.TestCheckResourceAttrSet(resourceName, "ip_address"),
-					resource.TestCheckResourceAttr(resourceName, "public_ip_address_allocation", "static"),
+					resource.TestCheckResourceAttr(resourceName, "public_ip_address_allocation", "Static"),
+					resource.TestCheckResourceAttr(resourceName, "ip_version", "IPv4"),
 				),
 			},
 			{
@@ -53,7 +54,7 @@ func TestAccAzureRMPublicIpStatic_zones(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					testCheckAzureRMPublicIpExists(resourceName),
 					resource.TestCheckResourceAttrSet(resourceName, "ip_address"),
-					resource.TestCheckResourceAttr(resourceName, "public_ip_address_allocation", "static"),
+					resource.TestCheckResourceAttr(resourceName, "public_ip_address_allocation", "Static"),
 					resource.TestCheckResourceAttr(resourceName, "zones.#", "1"),
 					resource.TestCheckResourceAttr(resourceName, "zones.0", "1"),
 				),
@@ -83,7 +84,7 @@ func TestAccAzureRMPublicIpStatic_basic_withDNSLabel(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					testCheckAzureRMPublicIpExists(resourceName),
 					resource.TestCheckResourceAttrSet(resourceName, "ip_address"),
-					resource.TestCheckResourceAttr(resourceName, "public_ip_address_allocation", "static"),
+					resource.TestCheckResourceAttr(resourceName, "public_ip_address_allocation", "Static"),
 					resource.TestCheckResourceAttr(resourceName, "domain_name_label", dnl),
 				),
 			},
@@ -128,7 +129,7 @@ func TestAccAzureRMPublicIpDynamic_basic_withIPv6(t *testing.T) {
 				Config: config,
 				Check: resource.ComposeTestCheckFunc(
 					testCheckAzureRMPublicIpExists(resourceName),
-					resource.TestCheckResourceAttr(resourceName, "ip_version", "ipv6"), //api returns all lowercase
+					resource.TestCheckResourceAttr(resourceName, "ip_version", "IPv6"),
 				),
 			},
 			{
